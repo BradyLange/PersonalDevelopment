@@ -10,10 +10,14 @@ Public Class BitmapLEDImage
 	' Global Variables: 
 	' Step number
 	Dim StepNum As Integer
+	' ResetFlag is a condition to reset the LED colors
+	Dim ResetFlag As Boolean = False
 
-	' Shapes for bitmap
-	Dim img As Image = Image.FromFile("T:\MDA and Automated Software\Automated\Source Code\Summer Development\01S1006 Toro ACM VS\Toro ACM Images\ACM.bmp")
-	Dim BMP As New Bitmap(img) '473, 456
+	' LEDs for bitmap on the image
+	Dim img As Image = Image.FromFile("C:\image.bmp")
+	Dim BMP As New Bitmap(img)
+	
+	' A graphic for each LED
 	Dim GFXLogicOnLED As Graphics = Graphics.FromImage(BMP)
 	Dim GFXStartInpLED As Graphics = Graphics.FromImage(BMP)
 	Dim GFXSVLLED As Graphics = Graphics.FromImage(BMP)
@@ -25,14 +29,9 @@ Public Class BitmapLEDImage
 	Dim GFXAERateLED As Graphics = Graphics.FromImage(BMP)
 	Dim GFXAutoLED As Graphics = Graphics.FromImage(BMP)
 	Dim GFXOKLED As Graphics = Graphics.FromImage(BMP)
-
-	' Properties for graphics (Rectangle = location of shape)
-	' Condition to reset the LED colors
-	Dim ResetFlag As Boolean = False
+	
+	' Properties for outline and creating the graphics (Rectangle = location of shape, Pen = Border of graphic)
 	Dim LEDPen As Pen
-	Dim LEDColorReset As Brush = Brushes.White
-	Dim LEDColorYellow As Brush = Brushes.Yellow
-	Dim LEDColorRed As Brush = Brushes.Red
 	Dim LogicOnRec As Rectangle
 	Dim StartInRec As Rectangle
 	Dim SVLRec As Rectangle
@@ -44,12 +43,19 @@ Public Class BitmapLEDImage
 	Dim AERateRec As Rectangle
 	Dim AutoRec As Rectangle
 	Dim OkRec As Rectangle
+	
+	' Properties for filling in the graphics with color
+	Dim LEDColorReset As Brush = Brushes.White
+	Dim LEDColorYellow As Brush = Brushes.Yellow
+	Dim LEDColorRed As Brush = Brushes.Red
 
 	' Form Load Event:
 	Public Sub Form1_Load(ByVal sender As System.Object, ByVAl e As System.EventArgs) Handles MyBase.Load
 		' Initializing the graphics for the Bitmap image
 		PicACM.Image = BMP
 		InitBMPGraphics()
+		' Fire up the program
+		Main()
 	End Sub
 
 	'Main Method to to execute the programs behaviors of manipulating LED color
