@@ -340,9 +340,9 @@ Public Class BitmapLEDImage
         ' OKLED
         GFXOKLED.DrawEllipse(LEDPen, OkRec)
 
-Reset:
-        ' Resetting all of the LEDs color to White (filling in the ellipse)
-        ResetLEDColors()
+	Reset:
+		' Resetting all of the LEDs color to White (filling in the ellipse)
+		ResetLEDColors()
     End Sub
 
     ' Resets all of the LEDs colors to White
