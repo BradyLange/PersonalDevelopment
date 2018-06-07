@@ -50,7 +50,7 @@ Public Class BitmapLEDImage
 	Dim LEDColorRed As Brush = Brushes.Red
 
 	' Form Load Event:
-	Public Sub Form1_Load(ByVal sender As System.Object, ByVAl e As System.EventArgs) Handles MyBase.Load
+	Public Sub BitmapLEDImage_Load(ByVal sender As System.Object, ByVAl e As System.EventArgs) Handles MyBase.Load
 		' Initializing the graphics for the Bitmap image
 		PicACM.Image = BMP
 		InitBMPGraphics()
