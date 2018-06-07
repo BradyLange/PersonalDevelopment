@@ -13,7 +13,7 @@ rem -- but in reality are actually stored on the D: partition. There is an insta
 rem -- but they are hard links and not physical directories. 
 
 rem -- Note: Press shift and F10 to bring up the CMD prompt upon installing Windows 
-rem -- The robocopy command copys the folders from the system C: partition
+rem -- The robocopy command copys the folders from the system C: partition and pastes them onto the D: partition 
 robocopy "C:\Users" "D:\Users" /E /COPYALL /XJ
 robocopy "C:\Program Files" "D:\Program Files" /E /COPYALL /XJ
 robocopy "C:\Program Files (x86)" "D:\Program Files (x86)" /E /COPYALL /XJ
