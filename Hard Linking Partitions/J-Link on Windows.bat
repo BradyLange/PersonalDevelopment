@@ -12,16 +12,19 @@ rem -- This batch file essentially tricks the C: partition by acting like all of
 rem -- but in reality are actually stored on the D: partition. There is an instances of the directories on the C: partition
 rem -- but they are hard links and not physical directories. 
 
-rem -- These commands copy the folders from the system C: partition
+rem -- Note: Press shift and F10 to bring up the CMD prompt upon installing Windows 
+rem -- The robocopy command copys the folders from the system C: partition
 robocopy "C:\Users" "D:\Users" /E /COPYALL /XJ
-robocopy "C:\Program Files" "E:\Program Files" /E /COPYALL /XJ
-robocopy "C:\Program Files (x86)" "E:\Program Files (x86)" /E /COPYALL /XJ
-robocopy "C:\ProgramData" "E:\ProgramData" /E /COPYALL /XJ
+robocopy "C:\Program Files" "D:\Program Files" /E /COPYALL /XJ
+robocopy "C:\Program Files (x86)" "D:\Program Files (x86)" /E /COPYALL /XJ
+robocopy "C:\ProgramData" "D:\ProgramData" /E /COPYALL /XJ
 
-rem -- These commands remove the original directory in the C: partition since it will no longer be needed
+rem -- The rmdir command removes the original directory in the C: partition since it will no longer be needed
 rmdir "C:\Users" /S /Q
 rmdir "C:\Program Files" /S /Q
 rmdir "C:\Program Files (x86)" /S /Q
+rem -- Upon trying to remove ProgramData 4 files will not be deleted because of "Access Denied"
+rem -- The partition thinks these files are being used currently
 rem -- You will still need to remove the rest of ProgramData directory as it will not fully be removed 
 rmdir "C:\ProgramData" /S /Q
 
@@ -29,11 +32,23 @@ rem -- The mklink (Make Link) with the /J property creates a hard link from the 
 rem -- Now the C: (system partition) thinks it has its proper system directories
 rem -- Don't J-Link the ProgramData directory as it hasn't been fully removed from the C: partition 
 mklink /J "C:\Users" "D:\Users"
-mklink /J "C:\Program Files" "E:\Program Files"
-mklink /J "C:\Program Files (x86)" "E:\Program Files (x86)"
+mklink /J "C:\Program Files" "D:\Program Files"
+mklink /J "C:\Program Files (x86)" "D:\Program Files (x86)"
+exit
+
+rem -- Open up the Registry Editor (regedit) to register the partition labels to correct label of D:
+regedit 
+rem -- Navigate the folders
+rem -- HKEY_LOCAL_MACHINE <-- SOFTWARE <-- MICROSOFT <-- WINDOWS <-- CurrentVersion
+rem -- In the CurrentVersion directory change all of the partition labels to D: instead of C:
+rem -- HKEY_LOCAL_MACHINE <-- SOFTWARE <-- MICROSOFT <-- WINDOWS NT <-- CurrentVersion <-- ProfileList
+rem -- In the ProfileList directory change all of the partition labels to D: instead of C:
+exit
+
 rem -- Complete installation of Windows then open the command prompt and remove the rest of the ProgramData directory from the C: partition
 rmdir "C:\ProgramData" /S /Q
 rem -- Finally, open the command prompt and create the junction for ProgramData with this command:
-mklink /J "C:\ProgramData" "E:\ProgramData"
+mklink /J "C:\ProgramData" "D:\ProgramData"
+exit
 
 rem -- Successfully junctioned the system folders from the D: partition to the C: partition (system partition)
