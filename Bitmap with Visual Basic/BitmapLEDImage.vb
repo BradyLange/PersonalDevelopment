@@ -296,8 +296,8 @@ Public Class BitmapLEDImage
 	' Initailizing the graphics for the bitmap image (color, size, coordinates)
 	Private Sub InitBMPGraphics()
 		' Creating graphic components (pen = pen color, pen size & rectangle = size) for the Bitmap of the ACM image
-			' Location of the Rectangle will be based upon your images width (x) and height (y)
-			' Pen color and size can be altered based upon preference
+		' Location of the Rectangle will be based upon your images width (x) and height (y)
+		' Pen color and size can be altered based upon preference
 		LEDPen = New Pen(Color.Black, 3)
 		' LogicOnLED
 		LogicOnRec = New Rectangle(PicACM.Image.Size.Width - 400, PicACM.Image.Size.Height - 321, 24, 21)
