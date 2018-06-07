@@ -1,5 +1,5 @@
 rem -- Author: Brady Lange
-rem -- Junction Links (Hard Links) in Windows operating system 
+rem -- Junction Links (Hard Links) in Windows operating system - **Moving System Files to Another Partition**
 rem -- Date: 6/6/18
 rem -- This batch file has commands that J-Links (hard links) directories from the D: partition to the C: system partition 
 rem -- to save space on the C: parition.
