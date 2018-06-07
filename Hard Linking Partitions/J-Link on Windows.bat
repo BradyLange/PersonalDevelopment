@@ -39,9 +39,9 @@ exit
 rem -- Open up the Registry Editor (regedit) to register the partition labels to correct label of D:
 regedit 
 rem -- Navigate the folders
-rem -- HKEY_LOCAL_MACHINE <-- SOFTWARE <-- MICROSOFT <-- WINDOWS <-- CurrentVersion
+rem -- HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS\CurrentVersion
 rem -- In the CurrentVersion directory change all of the partition labels to D: instead of C:
-rem -- HKEY_LOCAL_MACHINE <-- SOFTWARE <-- MICROSOFT <-- WINDOWS NT <-- CurrentVersion <-- ProfileList
+rem -- HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CurrentVersion\ProfileList
 rem -- In the ProfileList directory change all of the partition labels to D: instead of C:
 exit
 
