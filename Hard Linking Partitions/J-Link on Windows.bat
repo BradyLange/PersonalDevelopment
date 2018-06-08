@@ -20,6 +20,8 @@ robocopy "C:\Program Files (x86)" "D:\Program Files (x86)" /E /COPYALL /XJ
 robocopy "C:\ProgramData" "D:\ProgramData" /E /COPYALL /XJ
 
 rem -- The rmdir command removes the original directory in the C: partition since it will no longer be needed
+:: /S = Recursively drill down into directories
+
 rmdir "C:\Users" /S /Q
 rmdir "C:\Program Files" /S /Q
 rmdir "C:\Program Files (x86)" /S /Q
