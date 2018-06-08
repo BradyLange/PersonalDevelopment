@@ -34,6 +34,7 @@ rem -- Don't J-Link the ProgramData directory as it hasn't been fully removed fr
 mklink /J "C:\Users" "D:\Users"
 mklink /J "C:\Program Files" "D:\Program Files"
 mklink /J "C:\Program Files (x86)" "D:\Program Files (x86)"
+timeout 10
 exit
 
 rem -- Open up the Registry Editor (regedit) to register the partition labels to correct label of D:
@@ -43,12 +44,36 @@ rem -- HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS\CurrentVersion
 rem -- In the CurrentVersion directory change all of the partition labels to D: instead of C:
 rem -- HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CurrentVersion\ProfileList
 rem -- In the ProfileList directory change all of the partition labels to D: instead of C:
+timeout 10
 exit
 
 rem -- Complete installation of Windows then open the command prompt and remove the rest of the ProgramData directory from the C: partition
 rmdir "C:\ProgramData" /S /Q
 rem -- Finally, open the command prompt and create the junction for ProgramData with this command:
 mklink /J "C:\ProgramData" "D:\ProgramData"
+
+rem -- Now test to see if you have correctly configured your junction directories
+rem -- Directory to Search
+set directory = C:\
+
+rem -- The directory that will be searched
+echo Directory Search: %directory% & echo.
+
+rem -- Find SymLinks that are files in the directory
+rem -- If the error level is 0 it means the folder/file exists (found)
+dir "%directory%" | find "<SYMLINK>"
+if %ERRORLEVEL% EQU 0 echo This is a Symbolic Link File
+
+rem -- Find DIRECTORY SymLinks in directory
+rem -- This one should be the condition that executes as we created "Directory Symbolic Links"
+dir "%directory%" | find "<SYMLINKD>" 
+if %ERRORLEVEL% EQU 0 echo This is a Directory Symbolic Link
+
+rem -- Find JUNCTIONS in directory
+dir "%directory%" | find "<JUNCTION>" 
+if %ERRORLEVEL% EQU 0 echo This is a Directory Junction
+
+timeout 10
 exit
 
 rem -- Successfully junctioned the system folders from the D: partition to the C: partition (system partition)
