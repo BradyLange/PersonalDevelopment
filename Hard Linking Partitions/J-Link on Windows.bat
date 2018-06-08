@@ -20,18 +20,64 @@ echo.
 echo Welcome! & echo.
 echo What partition would you like to have as your main partition?
 echo HINT: Typically, people want to save memory on your system drive so chose another partition from that.
-set /p path="Drive Label:"
+
+:PrimaryPartition
+set /p choice="Drive Label: (Only one letter from 'A-Z')"
+if not "%choice:~1,1%"=="" (
+    set UserError="InvPrimPartition"
+    GOTO UserErrorHandling
+) if "%choice%" lss "a" (
+    set UserError="InvPrimPartition"
+    GOTO UserErrorHandling
+) if "%choice%" gtr "z" (
+    set UserError="InvPrimPartition"
+    GOTO UserErrorHandling
+)
+set path=%choice%
+
+:VerifyPrimaryPartition
 echo Are you sure you want this partition label: %path%?
 set /p retry="Enter 'Y' or 'N'.
-if /i "%retry%" == "Y" (
+if /i "%retry%" == "Y" ( :: /i = Not case sensitive
     echo Successfully registered your main partition! & echo.
     pause
 ) else if /i "%retry%" == "N" (
-    GOTO PartitionLabels
+    GOTO PrimaryPartition
 ) else (
-    set UserError = "Partitions"
+    set UserError = "VerifyPrimPart"
     GOTO UserErrorHandling
 )
+
+:SecondaryPartition
+echo Thank you! Now, what partition would you like these folders to be linked to?
+echo HINT: Typically, people chose the system drive so the system drive thinks it has its correct directories.
+set /p choice="Drive Label: (Only one letter from 'A-Z')"
+if not "%choice:~1,1%"=="" (
+    set UserError="InvSecPartition"
+    GOTO UserErrorHandling
+) if "%choice%" lss "a" (
+    set UserError="InvSecPartition"
+    GOTO UserErrorHandling
+) if "%choice%" gtr "z" (
+    set UserError="InvSecPartition"
+    GOTO UserErrorHandling
+)
+set linkpath=%choice%
+
+:VerifySecondaryPartition
+echo Are you sure you want this partition label: %linkpath%?
+set /p retry="Enter 'Y' or 'N'.
+if /i "%retry%" == "Y" (
+    echo Successfully registered your secondary partition! & echo.
+    pause
+) else if /i "%retry%" == "N" (
+    GOTO SecondaryPartition
+) else (
+    set UserError = "VerifySecPart"
+    GOTO UserErrorHandling
+)
+
+:FinishProgram
 echo ONLY press 'F' if you have already ran this program and want to finish the programs job!
 set finish="Enter 'C' to continue or 'F' if you want to FINISH manipulating the 'Program Data' directory: "
 if /i "%finish%" == "F" (
@@ -40,21 +86,6 @@ if /i "%finish%" == "F" (
     echo.
 ) else
     set UserError = "Finish"
-    GOTO UserErrorHandling
-)
-
-echo Thank you! Now, what partition would you like these folders to be linked to?
-echo HINT: Typically, people chose the system drive so the system drive thinks it has its correct directories.
-set /p linkpath="Drive Label:"
-echo Are you sure you want this partition label: %linkpath%?
-set /p retry="Enter 'Y' or 'N'.
-if /i "%retry%" == "Y" (
-    echo Successfully registered your secondary partition! & echo.
-    pause
-) else if /i "%retry%" == "N" (
-    GOTO PartitionLabels
-) else (
-    set UserError = "Partitions"
     GOTO UserErrorHandling
 )
 
@@ -134,21 +165,40 @@ if "%UserError%" == "Welcome" (
     echo Please try again.
     pause
     GOTO WarningScript
-) else if "%UserError%" == "Partitions" (
+) else if "%UserError%" == "VerifyPrimPart" (
     echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
     echo Your options are: 
     echo 'Y' = Yes.
     echo 'N' = No.
     pause
-    GOTO PartitionLabels
+    GOTO VerifyPrimaryPartition
+) else if "%UserError%" == "VerifySecPart" (
+    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
+    echo Your options are: 
+    echo 'Y' = Yes.
+    echo 'N' = No.
+    pause
+    GOTO VerifySecondaryPartition
 ) else if "%UserError%" == "Finish" (
     echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
     echo Your options are: 
     echo 'C' = Continue (first time running program)
     echo 'F' = Finish program (already have completed program steps)
     pause
-    GOTO PartitionLabels
-)    
+    GOTO FinishProgram
+) else if "%UserError%" == "InvPrimPartition" (
+    echo Error: You must enter ONLY one letter from A to Z.
+    echo Your options are:
+    echo Letters (A-Z) = A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+    pause
+    GOTO PrimaryPartition
+) else if "%UserError%" == "InvSecPartition" (
+    echo Error: You must enter ONLY one letter from A to Z.
+    echo Your options are:
+    echo Letters (A-Z) = A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+    pause
+    GOTO SecondaryPartition
+)
 
 :RoboCopyDirectories
 rem -- Note: Press shift and F10 to bring up the CMD prompt upon installing Windows if copying and pasting this script
