@@ -24,9 +24,8 @@ set /p path="Drive Label:"
 echo Are you sure you want this partition label: %path%?
 set /p retry="Enter 'Y' or 'N'.
 if /i "%retry%" == "Y" (
-  echo Successfully registered your main partition!
-  timeout 2
-) else if "%retry%" == "N" (
+  echo Successfully registered your main partition! & echo.
+) else if /i "%retry%" == "N" (
   GOTO PartitionLabels
 ) else (
   set UserError = "Partitions"
@@ -39,9 +38,9 @@ set /p linkpath="Drive Label:"
 echo Are you sure you want this partition label: %linkpath%?
 set /p retry="Enter 'Y' or 'N'.
 if /i "%retry%" == "Y" (
-  echo Successfully registered your main partition!
-  timeout 2
-) else if "%retry%" == "N" (
+  echo Successfully registered your secondary partition! & echo.
+  timeout /t 2
+) else if /i "%retry%" == "N" (
   GOTO PartitionLabels
 ) else (
   set UserError = "Partitions"
@@ -50,11 +49,11 @@ if /i "%retry%" == "Y" (
 
 :: User Welcome Script
 :Home
-echo Welcome! Press 'C' to continue, 'E' to leave, or 'P' to alter your partition labels.
-set /p response=Your choice:
+echo Welcome! 
+set /p response=Enter 'C' to continue, 'E' to leave, or 'P' to alter your partition labels:
 if /i "%response%" == "C" (
-  echo Thank you. Now moving to some verification.
-  timeout 2
+  echo Thank you. Now moving to some verification. & echo.
+  pause
   cls
   GoTo WarningScript
 ) else if "%response%" == "" (
@@ -65,6 +64,9 @@ if /i "%response%" == "C" (
   echo Have a wonderful rest of your day!
   timeout 3
   exit
+) else if /i "%response%" == "P" (
+  GOTO PartitionLabels
+
 ) else (
   set UserError = "Welcome"
   GOTO UserErrorHandling
@@ -75,9 +77,8 @@ if /i "%response%" == "C" (
 set response = ""
 echo Hi there! Thank you for using the program developed by Brady Lange.
 echo For safety make sure you use this batch file on a clean install of a Windows operating system.
-echo If used with a current operating system, it could cause system instability.
-echo Enter 'C' to continue or 'E' to cancel.
-set /p response='C' or 'E':  
+echo If used with a current operating system, it could cause system instability. & echo.
+set /p response=Enter 'C' to continue or 'E' to cancel:  
 if /i "%response%" == "C" (
   echo Your wish is my command!
   timeout 1
@@ -95,26 +96,26 @@ cls
 
 :: Catch user input error
 :UserErrorHandling
-if %UserError% == "Welcome" (
+if "%UserError%" == "Welcome" (
   echo Error: You must ONLY use the key strokes 'c' or 'e' NOT %response%
   echo 'c' = Continue with the program.
   echo 'e' = Exit the program.
   timeout 10
   GOTO Home
-) else if %UserError% == "Warning" (
+) else if "%UserError%" == "Warning" (
   echo Error: You must ONLY use the key strokes 'c' or 'e' NOT %response%
   echo 'c' = Continue with the program.
   echo 'e' = Cancel this step and go to home.
   timeout 10
   GOTO WarningScript
-) else if %UserError% == "BlankWelcome" (
+) else if "%UserError%" == "BlankWelcome" (
   echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
   echo Your options are: 
   echo 'c' = Continue with the program.
   echo 'e' = Cancel this step and go to home.
   timeout 10
   GOTO Home
-) else if %UserError% == "BlankWarning" (
+) else if "%UserError%" == "BlankWarning" (
   echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
   echo Your options are: 
   echo 'c' = Continue with the program.
@@ -122,7 +123,7 @@ if %UserError% == "Welcome" (
   echo Please try again.
   timeout 10
   GOTO WarningScript
-) else if %UserError% == "Partitions" (
+) else if "%UserError%" == "Partitions" (
   echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
   echo Your options are: 
   echo 'Y' = Yes.
