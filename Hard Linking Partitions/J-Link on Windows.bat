@@ -22,7 +22,7 @@ echo What partition would you like to have as your main partition?
 echo HINT: Typically, people want to save memory on your system drive so chose another partition from that.
 
 :PrimaryPartition
-set /p choice="Drive Label: (Only one letter from 'A-Z')"
+set /p choice="Drive Label (Only one letter from 'A-Z'): "
 if not "%choice:~1,1%"=="" (
     set UserError="InvPrimPartition"
     GOTO UserErrorHandling
@@ -37,7 +37,7 @@ set path=%choice%
 
 :VerifyPrimaryPartition
 echo Are you sure you want this partition label: %path%?
-set /p retry="Enter 'Y' or 'N'.
+set /p retry="Enter 'Y' or 'N': "
 if /i "%retry%" == "Y" ( :: /i = Not case sensitive
     echo Successfully registered your main partition! & echo.
     pause
@@ -51,7 +51,7 @@ if /i "%retry%" == "Y" ( :: /i = Not case sensitive
 :SecondaryPartition
 echo Thank you! Now, what partition would you like these folders to be linked to?
 echo HINT: Typically, people chose the system drive so the system drive thinks it has its correct directories.
-set /p choice="Drive Label: (Only one letter from 'A-Z')"
+set /p choice="Drive Label (Only one letter from 'A-Z'): "
 if not "%choice:~1,1%"=="" (
     set UserError="InvSecPartition"
     GOTO UserErrorHandling
@@ -66,7 +66,7 @@ set linkpath=%choice%
 
 :VerifySecondaryPartition
 echo Are you sure you want this partition label: %linkpath%?
-set /p retry="Enter 'Y' or 'N'.
+set /p retry="Enter 'Y' or 'N': "
 if /i "%retry%" == "Y" (
     echo Successfully registered your secondary partition! & echo.
     pause
