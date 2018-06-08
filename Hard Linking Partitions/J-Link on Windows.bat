@@ -14,18 +14,18 @@ rem -- but they are hard links and not physical directories.
 
 :: User Welcome Script
 :Home
-echo Welcome, press 'c' to continue or 'e' to leave
+echo Welcome, press 'C' to continue or 'E' to leave
 cls
 set response = " "
-set /p response=Input selection. 
-if /i "%response%" == "c" (
+set /p response = 'C' or 'E':
+if /i "%response%" == "C" (
   echo Thank you. Now moving to some verification.
   timeout 2
   GoTo RoboCopyDirectories
 ) else if "%response%" == " " (
   set UserError = "BlankWelcome"
   GOTO UserError
-) else if /i "%response%" == "e" (
+) else if /i "%response%" == "E" (
   echo Thank you for using Brady Lange's J-Link Program.
   echo Have a wonderful rest of your day!
   timeout 3
@@ -42,16 +42,16 @@ set response = " "
 echo Hi there! Thank you for using the program developed by Brady Lange.
 echo For safety make sure you use this batch file on a clean install of a Windows operating system.
 echo If used with a current operating system, it could cause system instability.
-echo Enter 'c' to continue or 'e' to cancel.
-set /p response=Input selection. 
-if /i "%response%" == "c" (
+echo Enter 'C' to continue or 'E' to cancel.
+set /p response = 'C' or 'E':  
+if /i "%response%" == "C" (
   echo Your wish is my command!
   timeout 1
   GoTo RoboCopyDirectories
 ) else if "%response%" == " " (
   set UserError = "BlankWarning"
   GOTO UserError
-) else if /i "%response%" == "e" (
+) else if /i "%response%" == "E" (
   GOTO Home
 ) else (
   set UserError = "Warning"
@@ -99,7 +99,6 @@ robocopy "C:\ProgramData" "D:\ProgramData" /E /COPYALL /XJ
 
 rem -- The rmdir command removes the original directory in the C: partition since it will no longer be needed
 :: /S = Recursively drill down into directories
-
 :RemoveDirectories
 rmdir "C:\Users" /S /Q
 rmdir "C:\Program Files" /S /Q
