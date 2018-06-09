@@ -88,9 +88,9 @@ echo ONLY press 'F' if you have already ran this program and want to finish the 
 set finish="Enter 'C' to continue or 'F' if you want to FINISH manipulating the 'Program Data' directory: "
 if /i "%finish%" == "F" (
     GOTO CleanLinks
-) else if /i "%finish%" == "C"
+) else if /i "%finish%" == "C" (
     echo.
-) else
+) else (
     set UserError = Finish
     GOTO UserErrorHandling
 )
