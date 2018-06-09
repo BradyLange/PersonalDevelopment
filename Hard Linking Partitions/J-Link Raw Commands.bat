@@ -1,10 +1,13 @@
 :: Developer: Brady Lange
 :: Date: 6/9/18
 :: This batch file is for users that want to copy and paste the commands into their CMD step by step.
+:: Use the batch file "J-Link on Windows.bat" for a more user-friendly experience.
 
 :: Partition path variables
 :: Enter the appropriate partition letters
+:: Partition that will be holding the physical directories
 set path=
+:: Partition that will be holding the link directories 
 set linkpath=
 
 :: Copy the directories to the partition you want to have the physical directories on
