@@ -2,13 +2,13 @@
 :: Comment the '@echo off' command if you would prefer more indepth details of the program.
 title ~Brady's J-Link O-Matic~
 rem -- Author: Brady Lange
-rem -- Junction Links (Hard Links) in Windows operating system - **Moving System Files to Another Partition**
+rem -- Junction Links *Hard Links* in Windows operating system - **Moving System Files to Another Partition**
 rem -- Date: 6/8/18
-rem -- This batch file has commands that J-Links (hard links) directories from the D: partition to the C: system partition 
+rem -- This batch file has commands that J-Links *hard links* directories from the D: partition to the C: system partition 
 rem -- to save space on the C: parition.
 rem -- This batch file is useful upon installing Windows for the very first time and you have a solid state drive as your
 rem -- system partition and want to save space on it.
-rem -- Use this batch file in Windows Command Prompt (cmd.exe or Command.COM)
+rem -- Use this batch file in Windows Command Prompt *cmd.exe or Command.COM*
 rem -- If successfully done the your system partition will not used as much space as most of the memory will now be stored
 rem -- on the D: partition.
 rem -- This batch file essentially tricks the C: partition by acting like all of its system sensitive directories are there
@@ -23,17 +23,17 @@ echo What partition would you like to have as your main partition?
 echo HINT: Typically, people want to save memory on your system drive so chose another partition from that.
 
 :PrimaryPartition
-set /p choice="Drive Label (Only one letter from 'A-Z'): "
+set /p choice="Drive Label - Only one letter from 'A-Z': "
 if not "%choice:~1,1%"=="" (
-    set UserError="InvPrimPartition"
+    set UserError=InvPrimPartition
     GOTO UserErrorHandling
 ) 
 if "%choice%" lss "a" (
-    set UserError="InvPrimPartition"
+    set UserError=InvPrimPartition
     GOTO UserErrorHandling
 ) 
 if "%choice%" gtr "z" (
-    set UserError="InvPrimPartition"
+    set UserError=InvPrimPartition
     GOTO UserErrorHandling
 )
 set path=%choice%
@@ -41,30 +41,31 @@ set path=%choice%
 :VerifyPrimaryPartition
 echo Are you sure you want this partition label: %path%?
 set /p retry="Enter 'Y' or 'N': "
-if /i "%retry%" == "Y" ( :: /i = Not case sensitive
+:: /i = Not case sensitive
+if /i "%retry%" == "Y" (
     echo Successfully registered your main partition! & echo.
     pause
 ) else if /i "%retry%" == "N" (
     GOTO PrimaryPartition
 ) else (
-    set UserError = "VerifyPrimPart"
+    set UserError = VerifyPrimPart
     GOTO UserErrorHandling
 )
 
 :SecondaryPartition
 echo Thank you! Now, what partition would you like these folders to be linked to?
 echo HINT: Typically, people chose the system drive so the system drive thinks it has its correct directories.
-set /p choice="Drive Label (Only one letter from 'A-Z'): "
+set /p choice="Drive Label - Only one letter from 'A-Z': "
 if not "%choice:~1,1%"=="" (
-    set UserError="InvSecPartition"
+    set UserError=InvSecPartition
     GOTO UserErrorHandling
 ) 
 if "%choice%" lss "a" (
-    set UserError="InvSecPartition"
+    set UserError=InvSecPartition
     GOTO UserErrorHandling
 ) 
 if "%choice%" gtr "z" (
-    set UserError="InvSecPartition"
+    set UserError=InvSecPartition
     GOTO UserErrorHandling
 )
 set linkpath=%choice%
@@ -78,7 +79,7 @@ if /i "%retry%" == "Y" (
 ) else if /i "%retry%" == "N" (
     GOTO SecondaryPartition
 ) else (
-    set UserError = "VerifySecPart"
+    set UserError = VerifySecPart
     GOTO UserErrorHandling
 )
 
@@ -90,7 +91,7 @@ if /i "%finish%" == "F" (
 ) else if /i "%finish%" == "C"
     echo.
 ) else
-    set UserError = "Finish"
+    set UserError = Finish
     GOTO UserErrorHandling
 )
 
@@ -104,7 +105,7 @@ if /i "%response%" == "C" (
     cls
     GoTo WarningScript
 ) else if "%response%" == "" (
-    set UserError = "BlankWelcome"
+    set UserError = BlankWelcome
     GOTO UserErrorHandling
 ) else if /i "%response%" == "E" (
     :ExitProgram
@@ -116,7 +117,7 @@ if /i "%response%" == "C" (
 ) else if /i "%response%" == "P" (
     GOTO PartitionLabels
 ) else (
-    set UserError = "Welcome"
+    set UserError = Welcome
     GOTO UserErrorHandling
 )
 
@@ -131,12 +132,12 @@ if /i "%response%" == "C" (
     echo Your wish is my command!
     GoTo RoboCopyDirectories
 ) else if "%response%" == "" (
-    set UserError = "BlankWarning"
+    set UserError = BlankWarning
     GOTO UserErrorHandling
 ) else if /i "%response%" == "E" (
     GOTO Home
 ) else (
-    set UserError = "Warning"
+    set UserError = Warning
     GOTO UserErrorHandling
 )
 cls
@@ -156,14 +157,14 @@ if "%UserError%" == "Welcome" (
     pause
     GOTO WarningScript
 ) else if "%UserError%" == "BlankWelcome" (
-    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
+    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character ASCII value.
     echo Your options are: 
     echo 'C' = Continue with the program.
     echo 'E' = Cancel this step and go to home.
     pause
     GOTO Home
 ) else if "%UserError%" == "BlankWarning" (
-    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
+    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character ASCII value.
     echo Your options are: 
     echo 'C' = Continue with the program.
     echo 'E' = Cancel this step and go to home.
@@ -171,36 +172,36 @@ if "%UserError%" == "Welcome" (
     pause
     GOTO WarningScript
 ) else if "%UserError%" == "VerifyPrimPart" (
-    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
+    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character ASCII value.
     echo Your options are: 
     echo 'Y' = Yes.
     echo 'N' = No.
     pause
     GOTO VerifyPrimaryPartition
 ) else if "%UserError%" == "VerifySecPart" (
-    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
+    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character ASCII value.
     echo Your options are: 
     echo 'Y' = Yes.
     echo 'N' = No.
     pause
     GOTO VerifySecondaryPartition
 ) else if "%UserError%" == "Finish" (
-    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character (ASCII) value.
+    echo Error: You CANNOT press 'Enter' or a key stroke that produces no character ASCII value.
     echo Your options are: 
-    echo 'C' = Continue (first time running program)
-    echo 'F' = Finish program (already have completed program steps)
+    echo 'C' = Continue *first time running program*
+    echo 'F' = Finish program *already have completed program steps*
     pause
     GOTO FinishProgram
 ) else if "%UserError%" == "InvPrimPartition" (
     echo Error: You must enter ONLY one letter from A to Z.
     echo Your options are:
-    echo Letters (A-Z) = A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+    echo Letters *A-Z* = A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
     pause
     GOTO PrimaryPartition
 ) else if "%UserError%" == "InvSecPartition" (
     echo Error: You must enter ONLY one letter from A to Z.
     echo Your options are:
-    echo Letters (A-Z) = A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+    echo Letters *A-Z* = A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
     pause
     GOTO SecondaryPartition
 )
@@ -244,8 +245,8 @@ mklink /J "%linkpath%:\Users" "%path%:\Users"
 mklink /J "%linkpath%:\Program Files" "%path%:\Program Files"
 mklink /J "%linkpath%:\Program Files (x86)" "%path%:\Program Files (x86)"
 
-rem -- Open up the Registry Editor (regedit) to register the partition labels to correct label of %path%:
-echo Now opening Registry Editor (REGEDIT)...
+rem -- Open up the Registry Editor *regedit* to register the partition labels to correct label of %path%:
+echo Now opening Registry Editor *REGEDIT*...
 pause
 regedit 
 echo -- Navigate the folders:
@@ -275,7 +276,7 @@ rem -- The directory that will be searched
 echo Directory Search: %directory% & echo.
 
 rem -- Find SymLinks that are files in the directory
-rem -- If the error level is 0 it means the folder/file exists (found)
+rem -- If the error level is 0 it means the folder/file exists *found*
 dir "%directory%" | find "<SYMLINK>"
 if %ERRORLEVEL% EQU 0 echo This is a Symbolic Link File
 
@@ -289,7 +290,7 @@ dir "%directory%" | find "<JUNCTION>"
 if %ERRORLEVEL% EQU 0 echo This is a Directory Junction
 
 echo You have SUCCESSFULLY junctioned the system folders 
-echo from the %path%: partition to the %linkpath%: partition (system partition)
+echo from the %path%: partition to the %linkpath%: partition *system partition*
 pause
 GOTO ExitProgram
 exit
