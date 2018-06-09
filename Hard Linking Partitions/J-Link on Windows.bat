@@ -302,4 +302,3 @@ echo You have SUCCESSFULLY junctioned the system folders
 echo from the %path%: partition to the %linkpath%: partition *system partition*
 pause
 GOTO ExitProgram
-exit
