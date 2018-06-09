@@ -1,5 +1,6 @@
 @echo off
 :: Comment the '@echo off' command if you would prefer more indepth details of the program.
+title ~Brady's J-Link O-Matic~
 rem -- Author: Brady Lange
 rem -- Junction Links (Hard Links) in Windows operating system - **Moving System Files to Another Partition**
 rem -- Date: 6/8/18
