@@ -1,6 +1,7 @@
 :: Developer: Brady Lange
 :: Date: 6/9/18
 :: This batch file is for users that want to copy and paste the commands into their CMD step by step.
+:: NOTE: If you just execute this batch file in CMD prompt it will give you unwanted results.
 :: Use the batch file "J-Link on Windows.bat" for a more user-friendly experience.
 
 :: Partition path variables
