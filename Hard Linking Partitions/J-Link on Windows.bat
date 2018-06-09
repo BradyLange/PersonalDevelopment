@@ -211,7 +211,7 @@ if "%UserError%" == "Welcome" (
     GOTO SecondaryPartition
 ) else if "%UserError%" == "SameDrive" (
     echo Error: You cannot have the same Drive Label as your main partition.
-    echo Please chose another Drive Label rather than %path%.
+    echo Please chose another Drive Label other than %path%:.
     pause
     GOTO SecondaryPartition
 )
