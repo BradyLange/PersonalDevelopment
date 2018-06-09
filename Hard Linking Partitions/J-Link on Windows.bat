@@ -48,7 +48,7 @@ if /i "%retry%" == "Y" (
 ) else if /i "%retry%" == "N" (
     GOTO PrimaryPartition
 ) else (
-    set UserError = VerifyPrimPart
+    set UserError=VerifyPrimPart
     GOTO UserErrorHandling
 )
 
@@ -83,7 +83,7 @@ if /i "%retry%" == "Y" (
 ) else if /i "%retry%" == "N" (
     GOTO SecondaryPartition
 ) else (
-    set UserError = VerifySecPart
+    set UserError=VerifySecPart
     GOTO UserErrorHandling
 )
 
@@ -95,7 +95,7 @@ if /i "%finish%" == "F" (
 ) else if /i "%finish%" == "C" (
     echo.
 ) else (
-    set UserError = Finish
+    set UserError=Finish
     GOTO UserErrorHandling
 )
 
@@ -109,7 +109,7 @@ if /i "%response%" == "C" (
     cls
     GoTo WarningScript
 ) else if "%response%" == "" (
-    set UserError = BlankWelcome
+    set UserError=BlankWelcome
     GOTO UserErrorHandling
 ) else if /i "%response%" == "E" (
     :ExitProgram
@@ -121,13 +121,12 @@ if /i "%response%" == "C" (
 ) else if /i "%response%" == "P" (
     GOTO PartitionLabels
 ) else (
-    set UserError = Welcome
+    set UserError=Welcome
     GOTO UserErrorHandling
 )
 
 :: User Interaction for Verification:
 :WarningScript
-set response = ""
 echo Hi there! Thank you for using the program developed by Brady Lange.
 echo For safety make sure you use this batch file on a clean install of a Windows operating system.
 echo If used with a current operating system, it could cause system instability. & echo.
@@ -136,12 +135,12 @@ if /i "%response%" == "C" (
     echo Your wish is my command!
     GoTo RoboCopyDirectories
 ) else if "%response%" == "" (
-    set UserError = BlankWarning
+    set UserError=BlankWarning
     GOTO UserErrorHandling
 ) else if /i "%response%" == "E" (
     GOTO Home
 ) else (
-    set UserError = Warning
+    set UserError=Warning
     GOTO UserErrorHandling
 )
 cls
@@ -280,7 +279,7 @@ mklink /J "%linkpath%:\ProgramData" "%path%:\ProgramData"
 rem -- Now test to see if you have correctly configured your junction directories
 rem -- Directory to Search
 echo Finding junction directories that you have created... & echo.
-set directory = %linkpath%:\
+set directory=%linkpath%:\
 
 rem -- The directory that will be searched
 echo Directory Search: %directory% & echo.
