@@ -298,7 +298,8 @@ rem -- Find JUNCTIONS in directory
 dir "%directory%" | find "<JUNCTION>" 
 if %ERRORLEVEL% EQU 0 echo This is a Directory Junction
 
-echo You have SUCCESSFULLY junctioned the system folders 
-echo from the %path%: partition to the %linkpath%: partition *system partition*
+echo You have SUCCESSFULLY junctioned the system folders
+echo from the %path%: partition to the %linkpath%: partition *system partition*!
 pause
+:: Exit the program as the program has completed its job.
 GOTO ExitProgram
