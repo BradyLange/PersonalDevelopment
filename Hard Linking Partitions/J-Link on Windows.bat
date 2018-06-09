@@ -148,6 +148,7 @@ cls
 
 :: Catch user input error
 :UserErrorHandling
+cls
 if "%UserError%" == "Welcome" (
     echo Error: You must ONLY use the key strokes 'C' or 'E' NOT %response%
     echo 'C' = Continue with the program.
