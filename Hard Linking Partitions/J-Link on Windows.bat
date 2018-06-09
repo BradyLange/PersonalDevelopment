@@ -68,6 +68,10 @@ if "%choice%" gtr "z" (
     set UserError=InvSecPartition
     GOTO UserErrorHandling
 )
+if /i "%choice%" equ "%path%" (
+    set UserError=SameDrive
+    GOTO UserErrorHandling
+)
 set linkpath=%choice%
 
 :VerifySecondaryPartition
@@ -85,7 +89,7 @@ if /i "%retry%" == "Y" (
 
 :FinishProgram
 echo ONLY press 'F' if you have already ran this program and want to finish the programs job!
-set finish="Enter 'C' to continue or 'F' if you want to FINISH manipulating the 'Program Data' directory: "
+set /p finish="Enter 'C' to continue or 'F' if you want to FINISH manipulating the 'Program Data' directory: "
 if /i "%finish%" == "F" (
     GOTO CleanLinks
 ) else if /i "%finish%" == "C" (
@@ -202,6 +206,11 @@ if "%UserError%" == "Welcome" (
     echo Error: You must enter ONLY one letter from A to Z.
     echo Your options are:
     echo Letters *A-Z* = A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+    pause
+    GOTO SecondaryPartition
+) else if "%UserError%" == "SameDrive" (
+    echo Error: You cannot have the same Drive Label as your main partition.
+    echo Please chose another Drive Label rather than %path%.
     pause
     GOTO SecondaryPartition
 )
