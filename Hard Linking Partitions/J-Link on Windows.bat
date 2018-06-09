@@ -27,10 +27,12 @@ set /p choice="Drive Label (Only one letter from 'A-Z'): "
 if not "%choice:~1,1%"=="" (
     set UserError="InvPrimPartition"
     GOTO UserErrorHandling
-) if "%choice%" lss "a" (
+) 
+if "%choice%" lss "a" (
     set UserError="InvPrimPartition"
     GOTO UserErrorHandling
-) if "%choice%" gtr "z" (
+) 
+if "%choice%" gtr "z" (
     set UserError="InvPrimPartition"
     GOTO UserErrorHandling
 )
@@ -56,10 +58,12 @@ set /p choice="Drive Label (Only one letter from 'A-Z'): "
 if not "%choice:~1,1%"=="" (
     set UserError="InvSecPartition"
     GOTO UserErrorHandling
-) if "%choice%" lss "a" (
+) 
+if "%choice%" lss "a" (
     set UserError="InvSecPartition"
     GOTO UserErrorHandling
-) if "%choice%" gtr "z" (
+) 
+if "%choice%" gtr "z" (
     set UserError="InvSecPartition"
     GOTO UserErrorHandling
 )
