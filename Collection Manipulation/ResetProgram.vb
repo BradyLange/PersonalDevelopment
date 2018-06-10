@@ -1,6 +1,6 @@
 ' Developer: Brady Lange
 ' Date: 6/9/18
-' This program rests colors of shape elements and resets text box's text.
+' This program rests colors of shape elements and resets text box's text using a collection to iterate through the elements.
 ' Language: Visual Basic (Visual Studio 2010)
 ' Elements: 
 ' ShapeContainers: ShapeContainerA, ShapeContainerB, ShapeContainerC
