@@ -28,7 +28,7 @@ public class UIHApp
 		            case 1:
 		                while(true)
 		                {
-		                    System.out.println("I bet you weren't expecting this kind of surprise... Times you've seen this: " + count++);
+		                    System.out.println("I bet you weren't expecting this kind of surprise... Times you've seen this: " + ++count);
 		                    if(count == 50)
 		                    {
 		                        break;
